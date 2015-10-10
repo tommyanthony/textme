@@ -46,7 +46,7 @@ def directions(origin, destination):
         build_string+= line["direction"]
         build_string+= " ("
         build_string+= line["duration"] + ", "
-        build_string+= line["distance"] + ")<br>"
+        build_string+= line["distance"] + ")\n"
     return build_string
 
 if __name__ == "__main__":
