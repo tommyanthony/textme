@@ -4,11 +4,11 @@ from rq import Queue
 from consts import RQ_HOST, RQ_PORT
 
 
-from db.connector import Connector
+from connector import DatabaseConnector
 from http_request import process_request
 
 app = Flask(__name__)
-db = Connector()
+db = DatabaseConnector()
 queue = Queue(connection=Redis(RQ_HOST, RQ_PORT))
 
 

@@ -12,3 +12,6 @@ def send_message(to_num, body):
     Sends a message to TO_NUM with a message body of BODY
     """
     message = client.messages.create(to=to_num, from_=FROM_NUMBER, body=body)
+
+def print_message(to_num, body):
+    print("%s: %s" % (to_num, body))

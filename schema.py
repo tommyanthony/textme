@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
 
+from consts import DB_NAME, SQL_TYPE, DRIVER, HOST, USER
+
 """
 This file defines the schema format for the database.
 To get the database set up on your machine, run
@@ -33,12 +35,6 @@ class Endpoint(Base):
     endpoint = Column(String(250), nullable=False)
     service = Column(String(100), nullable=False)
 
-
-DB_NAME = 'twilio'
-SQL_TYPE = 'mysql'
-DRIVER = 'pymysql'
-HOST = 'localhost'
-USER = 'root'
 
 def create_db_session(db_url=None):
     if db_url is None:

@@ -1,11 +1,21 @@
-from parsing import interpret_request, validate_grammar
 import requests
+
+from parsing import interpret_request, validate_grammar
 from connector import DatabaseConnector
+from send_sms import print_message
+
+from rq import Queue, Connection
+from redis import Redis
+from consts import RQ_HOST, RQ_PORT
 
 #service_to_gram = {'google':['{str:"maps"},{str:},{str:}']}
 #gram_to_endpoint = {'{str:"maps"},{str:},{str:}':'http://127.0.0.1:5000/directions/{1}/{2}'}
 service_to_gram = {}
 gram_to_endpoint = {}
+
+
+with Connection(Redis(RQ_HOST, RQ_PORT)):
+    queue = Queue()
 
 def process_request(id_num, phone, body):
     service = body.split(',')[0]
@@ -22,7 +32,8 @@ def process_request(id_num, phone, body):
                 if endpoint[i] == '{':
                     endpoint = endpoint[:i] + params[int(endpoint[i+1])] + endpoint[i+3:]
                 i += 1
-            return http_request(endpoint, params)
+            queue.enqueue(print_message, phone, http_request(endpoint, params))
+            # return http_request(endpoint, params)
 
 
 def http_request(url, body):
