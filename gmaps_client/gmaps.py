@@ -36,7 +36,6 @@ def directions(origin, destination):
         i += 1
     #convert into list of dictionaries where each category is key
 
-    print(json.dumps(output))
     return json.dumps(output)
 
 if __name__ == "__main__":
