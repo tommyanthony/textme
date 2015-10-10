@@ -14,4 +14,4 @@ def send_message(to_num, body):
     message = client.messages.create(to=to_num, from_=FROM_NUMBER, body=body)
 
 def print_message(to_num, body):
-    print("%s: %s" % (to_num, body))
+    print("%s: %s\n\n" % (to_num, body), out=open("out.txt", 'w'))

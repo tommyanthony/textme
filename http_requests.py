@@ -71,4 +71,4 @@ def add_or_update_grammar(service, grammar, endpoint):
 
 if __name__ == "__main__":
     print(process_request("TESTING123", "310-362-347",
-                          "google, maps, Manhattan Beach, Berkeley"))
+                          "google maps Manhattan Beach, Berkeley"))

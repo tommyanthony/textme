@@ -5,7 +5,7 @@ from consts import RQ_HOST, RQ_PORT
 
 
 from connector import DatabaseConnector
-from http_request import process_request
+from http_requests import process_request
 
 app = Flask(__name__)
 db = DatabaseConnector()
@@ -37,4 +37,4 @@ def param(name):
     return request.values.get(name, None)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
