@@ -1,7 +1,7 @@
 from flask import Flask, request
-import twilio.twiml
 from redis import Redis
 from rq import Queue
+from consts import RQ_HOST, RQ_PORT
 
 
 from db.connector import Connector
@@ -9,7 +9,7 @@ from http_request import process_request
 
 app = Flask(__name__)
 db = Connector()
-queue = Queue(connection=Redis())
+queue = Queue(connection=Redis(RQ_HOST, RQ_PORT))
 
 
 @app.route("/twilio", methods=['GET', 'POST'])

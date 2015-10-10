@@ -1,8 +1,9 @@
-import parsing
+from parsing import interpret_request
+import requests
 import http.client, urllib.parse
 
 service_to_gram = {}
-gram_to_endpoint = {}		
+gram_to_endpoint = {}
 
 # cannot have more than 10 params!
 def process_request(id_num, phone, body):
@@ -22,8 +23,12 @@ def process_request(id_num, phone, body):
 			return http_request(endpoint, params)
 
 def http_request(url, body):
-	params = urllib.parse.urlencode({'@body': body})
-	headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-	conn = http.client.HTTPConnection(url)
-	conn.request("GET", "", params, headers)
-	return conn.getresponse()
+    payload = {'body': body}
+    return requests.get(url, data=payload)
+
+def old_http_request(url, body):
+    params = urllib.parse.urlencode({'@body': body})
+    headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+    conn = http.client.HTTPConnection(url)
+    conn.request("GET", "", params, headers)
+    return conn.getresponse()
