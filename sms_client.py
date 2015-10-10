@@ -8,7 +8,7 @@ from connector import DatabaseConnector
 from http_requests import process_request
 
 app = Flask(__name__)
-db = DatabaseConnector()
+#db = DatabaseConnector()
 queue = Queue(connection=Redis(RQ_HOST, RQ_PORT))
 
 
@@ -25,7 +25,7 @@ def recieve_sms():
     body = param('Body')
     if from_number and unique_id and body:
         # Add to RQ in addition
-        db.add_received_sms(from_num=from_number, body=body, id=unique_id)
+        #db.add_received_sms(from_num=from_number, body=body, id=unique_id)
         queue.enqueue(process_request, unique_id, from_number, body)
         return "Queued"
     else:

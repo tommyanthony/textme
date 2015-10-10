@@ -8,17 +8,17 @@ from rq import Queue, Connection
 from redis import Redis
 from consts import RQ_HOST, RQ_PORT
 
-#service_to_gram = {'google':['{str:"maps"},{str:},{str:}']}
-#gram_to_endpoint = {'{str:"maps"},{str:},{str:}':'http://127.0.0.1:5000/directions/{1}/{2}'}
-service_to_gram = {}
-gram_to_endpoint = {}
+service_to_gram = {'google':['{str:"maps"},{str:},{str:}']}
+gram_to_endpoint = {'{str:"maps"},{str:},{str:}':'http://127.0.0.1:5000/directions/{1}/{2}'}
+#service_to_gram = {}
+#gram_to_endpoint = {}
 
 
 with Connection(Redis(RQ_HOST, RQ_PORT)):
     queue = Queue()
 
 def process_request(id_num, phone, body):
-    service = body.split(',')[0]
+    service = body.split(' ')[0]
     if service not in list(service_to_gram.keys()):
         return "ERROR - no such service"
     grammars = service_to_gram[service]
@@ -41,7 +41,7 @@ def http_request(url, body):
     payload = {'body': body}
     return requests.get(url, data=payload).text
 
-conn = DatabaseConnector()
+#conn = DatabaseConnector()
 
 def load_grammars():
     db = conn.query_endpoints()
