@@ -1,0 +1,7 @@
+import requests
+
+from_num = "949-636-2053"
+messId = "4"
+body = "google, maps, los angeles, san francisco"
+payload = {"From":from_num, "MessageSid":messId, "Body":body}
+requests.get("http://127.0.0.1:5000/twilo", params=payload)

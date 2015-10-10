@@ -1,17 +1,41 @@
 import re 
 
+# no spaces in first two items
 def interpret_request(request_string, grammar):
-    # remove all spaces not in strings
-    string = False
+    num_spaces = 0
     i = 0
     while i < len(request_string):
-        if request_string[i] == '"':
-            string = not string
-        if request_string[i] == ' ' and not string:
-            request_string = request_string[:i] + request_string[i+1:]
-        i+=1
+        if(request_string[i] == ' '):
+            request_string = request_string[:i] + ',' + request_string[i+1:]
+            num_spaces += 1
+        if num_spaces == 2:
+            break
+        i += 1
 
-    print(request_string)
+    i = 0
+    comma = False
+    while i < len(request_string):
+        if request_string[i] != ' ':
+            comma = False
+        if request_string[i] == ',':
+            comma = True
+            i += 1
+            continue
+        if comma:
+            request_string = request_string[:i] + request_string[i+1:]
+        i += 1
+
+    # remove all spaces not in strings
+    #string = False
+    #i = 0
+    #while i < len(request_string):
+    #    if request_string[i] == '"':
+    #        string = not string
+    #    if request_string[i] == ' ' and not string:
+    #        request_string = request_string[:i] + request_string[i+1:]
+    #    i+=1
+
+    #print(request_string)
 
     items = request_string.split(',')
     if len(items) == 0:
@@ -36,7 +60,6 @@ def interpret_request(request_string, grammar):
             return "ERROR"
         cur_grammar = grammar[i-1]
         input_type = cur_grammar[1:4]
-        print(input_type)
 
         str_case = False
         float_case = False
