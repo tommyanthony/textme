@@ -1,6 +1,7 @@
 from schema import ReceivedSms, Response, Endpoints, create_db_session
 
 db_session = create_db_session()
+GMAPS_API = "https://"
 
 def insert_test_data():
     db_session.add(

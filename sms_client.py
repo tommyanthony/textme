@@ -27,6 +27,7 @@ def recieve_sms():
         # Add to RQ in addition
         db.add_received_sms(from_num=from_number, body=body, id=unique_id)
         queue.enqueue(process_request, unique_id, from_number, body)
+        return "Queued"
     else:
         # error?
         raise Exception("One of from, unique_id, and body is null!")
