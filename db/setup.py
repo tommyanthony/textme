@@ -6,7 +6,7 @@ GMAPS_API = "http://127.0.0.1:5000/directions/{1}/{2}"
 def insert_test_data():
     db_session.add(
         Endpoints(service='google',
-                  grammar='{str:}, {str:"regex";"alt_regex"},[int:1;2]',
+                  grammar='{str:"maps"}, {str:}, {str:}',
                   endpoint=GMAPS_API)
     )
     db_session.commit()
