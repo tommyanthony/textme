@@ -1,8 +1,6 @@
 import re 
 
-grammars = {}
-
-def interpret_request(request_string):
+def interpret_request(request_string, grammar):
 	# remove all spaces not in strings
 	string = False
 	i = 0
@@ -17,9 +15,9 @@ def interpret_request(request_string):
 	if len(items) == 0:
 		return "ERROR - no parameters"
 	service = items[0]
-	if service not in list(grammars.keys()):
-		return "ERROR - no such service"
-	grammar = grammars[service]
+	#if service not in list(grammars.keys()):
+	#	return "ERROR - no such service"
+	#grammar = grammars[service]
 	grammar = grammar.split(',')
 	output_params = []
 
