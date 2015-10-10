@@ -8,8 +8,8 @@ from rq import Queue, Connection
 from redis import Redis
 from consts import RQ_HOST, RQ_PORT
 
-service_to_gram = {'google':['{str:"maps"},{str:},{str:}']}
-gram_to_endpoint = {'{str:"maps"},{str:},{str:}':'http://127.0.0.1:5000/directions/{1}/{2}'}
+service_to_gram = {'google':['{str:"maps"},{str:},{str:}'], 'weather':['{str:"forecast"},{str:}']}
+gram_to_endpoint = {'google:{str:"maps"},{str:},{str:}':'http://127.0.0.1:5000/directions/{1}/{2}', 'weather:{str:"forecast"},{str:}':'http://127.0.0.1:5002/forecast/{1}'}
 #service_to_gram = {}
 #gram_to_endpoint = {}
 
@@ -26,7 +26,7 @@ def process_request(id_num, phone, body):
         params = interpret_request(body, g)
         if type(params) != str:
             print(params)
-            endpoint = gram_to_endpoint[g]
+            endpoint = gram_to_endpoint[service+":"+g]
             i = 0
             while i < len(endpoint):
                 if endpoint[i] == '{':
