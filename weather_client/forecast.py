@@ -47,6 +47,8 @@ def directions(location):
     # only retrieve the name of the day, summary, max temp, and min temp
     i = 0
     for day in forecast:
+        if (i == 3):
+            break
         d = dict()
         d['day'] = get_day(day['time'], i)
         d['summary'] = day['summary']
