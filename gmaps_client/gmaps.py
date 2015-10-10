@@ -35,8 +35,19 @@ def directions(origin, destination):
         output['Route {0}:'.format(i)] = sub_output
         i += 1
     #convert into list of dictionaries where each category is key
-
-    return json.dumps(output)
+    #jsond = json.dumps(output)
+    route = output["Route 1:"]
+    build_string = ""
+    for line in route:
+        if "total time" in line.keys():
+            build_string += line["total time"] + " " + line["total distance"]
+            break
+        print(line)
+        build_string+= line["direction"]
+        build_string+= " ("
+        build_string+= line["duration"] + ", "
+        build_string+= line["distance"] + ")<br>"
+    return build_string
 
 if __name__ == "__main__":
     app.run(debug=True)
