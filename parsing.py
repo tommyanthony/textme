@@ -1,7 +1,5 @@
 import re 
 
-grammars = {'google':'{str:"maps"}, {str:}, {str:}'}
-
 def interpret_request(request_string, grammar):
     # remove all spaces not in strings
     string = False
@@ -12,6 +10,8 @@ def interpret_request(request_string, grammar):
         if request_string[i] == ' ' and not string:
             request_string = request_string[:i] + request_string[i+1:]
         i+=1
+
+    print(request_string)
 
     items = request_string.split(',')
     if len(items) == 0:
@@ -36,6 +36,7 @@ def interpret_request(request_string, grammar):
             return "ERROR"
         cur_grammar = grammar[i-1]
         input_type = cur_grammar[1:4]
+        print(input_type)
 
         str_case = False
         float_case = False
@@ -125,18 +126,3 @@ def validate_grammar(grammar):
 
     # does not check that list of possible options is valid
     return True
-
-
-def add_or_update_grammar(service, grammar):
-    # remove all spaces not in strings
-    string = False
-    i = 0
-    while i < len(grammar):
-        if grammar[i] == '"':
-            string = not string
-        if grammar[i] == ' ' and not string:
-            grammar = grammar[:i] + grammar[i+1:]
-        i+=1
-
-    if validate_grammar(grammar):
-        grammars[service] = grammar
