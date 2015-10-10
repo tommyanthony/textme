@@ -1,6 +1,6 @@
 import re 
 
-grammars = {}
+grammars = {'google':'{str:"maps"}, {str:}, {str:}'}
 
 def interpret_request(request_string, grammar):
     # remove all spaces not in strings

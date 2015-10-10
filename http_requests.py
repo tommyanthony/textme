@@ -2,8 +2,8 @@ from parsing import interpret_request
 import requests
 import http.client, urllib.parse
 
-service_to_gram = {}
-gram_to_endpoint = {}       
+service_to_gram = {'google':['{str:"maps"}, {str:}, {str:}']}
+gram_to_endpoint = {'{str:"maps"}, {str:}, {str:}':'http://127.0.0.1:5000/directions/{1}/{2}'}       
 
 # cannot have more than 10 params!
 def process_request(id_num, phone, body):
