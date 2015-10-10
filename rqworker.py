@@ -1,11 +1,9 @@
-from rq import Queue, use_connection, Worker, Connection
+from rq import Queue, Worker, Connection
 from redis import Redis
-
-HOST = 'localhost'
-PORT = 6379
+from consts import RQ_HOST, RQ_PORT
 
 
-def new_worker(host=HOST, port=PORT):
+def new_worker(host=RQ_HOST, port=RQ_PORT):
     with Connection(Redis(host, port)):
         q = Queue()
         w = Worker(q)

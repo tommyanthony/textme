@@ -5,6 +5,7 @@ from rq import Queue
 
 
 from db.connector import Connector
+from http_request import process_request
 
 app = Flask(__name__)
 db = Connector()
@@ -25,12 +26,10 @@ def recieve_sms():
     if from_number and unique_id and body:
         # Add to RQ in addition
         db.add_received_sms(from_num=from_number, body=body, id=unique_id)
-        # queue.enqueue()
+        queue.enqueue(process_request, unique_id, from_number, body)
     else:
         # error?
-        resp = twilio.twiml.Response()
-        resp.message("Hello, Mobile Monkey")
-        return str(resp)
+        raise Exception("One of from, unique_id, and body is null!")
 
 
 def param(name):
