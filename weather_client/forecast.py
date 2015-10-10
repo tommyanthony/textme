@@ -56,7 +56,7 @@ def directions(location):
         i += 1
 
     #format of output is a list of dictionaries where each list entry is the forecast for that day
-    return str(output)
+    return to_string(output)
 
 if __name__ == "__main__":
     app.run(debug = True)
