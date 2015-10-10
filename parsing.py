@@ -1,5 +1,7 @@
 import re 
 
+grammars = {}
+
 def interpret_request(request_string, grammar):
 	# remove all spaces not in strings
 	string = False
@@ -59,11 +61,17 @@ def interpret_request(request_string, grammar):
 		added = False
 		for cur in remaining_grammar:
 			if str_case:
-				regex = re.compile(cur[1:-1])
-				if regex.match(item):
-					added = True
-					output_params.append(item)
-					break
+				if cur[0] == 'r':
+					regex = re.compile(cur[2:-1])
+					if regex.match(item):
+						added = True
+						output_params.append(item)
+						break
+				else:
+					if item == cur[1:-1]:
+						added = True
+						output_params.append(item)
+						break
 			elif float_case:
 				if item == float(cur):
 					output_params.append(item)
