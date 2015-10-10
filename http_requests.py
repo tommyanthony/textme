@@ -19,7 +19,7 @@ def process_request(id_num, phone, body):
 				if endpoint[i] == '{':
 					endpoint = endpoint[:i] + params[int(endpoint[i+1])] + endpoint[i+3:]
 				i += 1
-			http_request(endpoint, params)
+			return http_request(endpoint, params)
 
 def http_request(url, body):
 	params = urllib.parse.urlencode({'@body': body})
