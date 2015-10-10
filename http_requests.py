@@ -2,7 +2,7 @@ import requests
 
 from parsing import interpret_request, validate_grammar
 from connector import DatabaseConnector
-from send_sms import print_message
+from send_sms import send_message
 
 from rq import Queue, Connection
 from redis import Redis
@@ -32,7 +32,7 @@ def process_request(id_num, phone, body):
                 if endpoint[i] == '{':
                     endpoint = endpoint[:i] + params[int(endpoint[i+1])] + endpoint[i+3:]
                 i += 1
-            queue.enqueue(print_message, phone, http_request(endpoint, params))
+            queue.enqueue(send_message, phone, http_request(endpoint, params))
             # return http_request(endpoint, params)
 
 
