@@ -1,7 +1,12 @@
+amqp==1.4.7
+anyjson==0.3.3
+billiard==3.3.0.20
+celery==3.1.18
 Flask==0.10.1
 httplib2==0.9.2
 itsdangerous==0.24
 Jinja2==2.8
+kombu==3.0.27
 MarkupSafe==0.23
 PySocks==1.5.6
 pytz==2015.6
