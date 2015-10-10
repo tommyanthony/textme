@@ -1,7 +1,14 @@
 from flask import Flask, request
 import twilio.twiml
+from redis import Redis
+from rq import Queue
+
+
+from db.connector import Connector
 
 app = Flask(__name__)
+db = Connector()
+queue = Queue(connection=Redis())
 
 
 @app.route("/twilio", methods=['GET', 'POST'])
@@ -16,8 +23,9 @@ def recieve_sms():
     unique_id = param('MessageSid')
     body = param('Body')
     if from_number and unique_id and body:
-        # insert into DB for Celery to pick up
-        pass
+        # Add to RQ in addition
+        db.add_received_sms(from_num=from_number, body=body, id=unique_id)
+        # queue.enqueue()
     else:
         # error?
         resp = twilio.twiml.Response()

@@ -4,6 +4,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
 
+"""
+This file defines the schema format for the database.
+To get the database set up on your machine, run
+python schema.py create
+"""
+
 
 Base = declarative_base()
 
@@ -12,7 +18,6 @@ class ReceivedSms(Base):
     id = Column(String(34), primary_key=True)
     from_num = Column(String(100), nullable=False)
     body = Column(String(1600), nullable=False)
-    resolved = Column(BOOLEAN)
 
 class Response(Base):
     __tablename__ = 'response'
@@ -20,10 +25,9 @@ class Response(Base):
     sms_id = Column(String(34), ForeignKey(ReceivedSms.__tablename__ + ".id"))
     to_num = Column(String(100), nullable=False)
     body = Column(String(1600), nullable=False)
-    sent = Column(BOOLEAN)
 
-class Endpoints(Base):
-    __tablename__ = 'endpoints'
+class Endpoint(Base):
+    __tablename__ = 'endpoint'
     id = Column(Integer, primary_key=True)
     grammar = Column(String(300), nullable=False)
     endpoint = Column(String(250), nullable=False)
@@ -55,10 +59,13 @@ def generate_url(db_name=DB_NAME, sql_type=SQL_TYPE, driver=DRIVER, host=HOST,
 def create_tables(db_url=None):
     if db_url is None:
         db_url = generate_url()
+    print("Connecting to database at %s" % db_url)
     engine = create_engine(db_url)
     if not database_exists(engine.url):
+        print("Creating database %s" % DB_NAME)
         create_database(engine.url)
     Base.metadata.create_all(create_engine(db_url))
+    print("Created tables! Open up mysql to see.")
 
 if __name__ == "__main__":
     import sys
