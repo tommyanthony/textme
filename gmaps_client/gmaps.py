@@ -3,7 +3,7 @@ import googlemaps
 
 app = Flask(__name__)
 with open("key.txt") as input_key:
-    key = input_key[0]
+    key = next(input_key).strip("\n")
 
 def remove_tags(text):
     output = text.replace("<b>", "")
@@ -14,7 +14,7 @@ def remove_tags(text):
 
 @app.route('/directions/<origin>/<destination>')
 def directions(origin, destination):
-    gmaps = googlemaps.Client(key='nice try')
+    gmaps = googlemaps.Client(key=key)
     directions_result = gmaps.directions(origin, destination)
     output = dict() # output is a dictionary, keyed by routes, of lists of dictionaries of steps and total data
     i = 1
@@ -39,4 +39,4 @@ def directions(origin, destination):
     return str(output)
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)
