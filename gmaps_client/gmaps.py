@@ -1,4 +1,5 @@
 from flask import Flask, url_for
+import json
 import googlemaps
 
 app = Flask(__name__)
@@ -33,8 +34,8 @@ def directions(origin, destination):
         i += 1
     #convert into list of dictionaries where each category is key
 
-
-    return str(output)
+    print(json.dumps(output))
+    return json.dumps(output)
 
 if __name__ == "__main__":
     app.run(debug = True)
