@@ -1,1 +1,2 @@
-python rqworker.py > logs/worker.txt &
+cd ../
+python3 rqworker.py > logs/worker.txt &
