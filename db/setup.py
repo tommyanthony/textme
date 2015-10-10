@@ -6,7 +6,7 @@ GMAPS_API = "https://"
 def insert_test_data():
     db_session.add(
         Endpoints(service='google',
-                 grammar='{str:}, {str:"regex";"alt_regex"},[int:1;2]',
+                 grammar='{str:"maps"}, {str:}, {str:}',
                  endpoint='https://www.uber.com/pickup/{0}'))
     db_session.commit()
 
