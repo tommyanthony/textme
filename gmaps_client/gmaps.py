@@ -1,7 +1,9 @@
-from flask import Flask, url_for
+from flask import Flask
 import googlemaps
 
 app = Flask(__name__)
+with open("key.txt") as input_key:
+    key = input_key[0]
 
 def remove_tags(text):
     output = text.replace("<b>", "")
