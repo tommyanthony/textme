@@ -7,9 +7,9 @@
 ##Dependencies
 Dependencies located in requirements.txt
 To install: 
-<pre><code>pip install -r</pre></code>
+<pre><code>pip install requirements.txt -r</pre></code>
 
 ##Setup 
-1. manually start redis-server
+1.  redis-server
 2. ./setup.sh
 2. ./workers <# of workers defaulted to 1>
