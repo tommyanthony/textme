@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/python,sublimetext,vim,osx,windows
 
 gmaps_client/key.txt
+weather_client/weather.cfg
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
