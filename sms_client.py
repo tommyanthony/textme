@@ -36,5 +36,9 @@ def recieve_sms():
 def param(name):
     return request.values.get(name, None)
 
+@app.route('/')
+def index():
+    return "<b>Running</b>"
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
