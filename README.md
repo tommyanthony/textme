@@ -10,6 +10,6 @@ To install:
 <pre><code>pip install -r</pre></code>
 
 ##Setup 
-1 manually start redis-server
-2 ./setup.sh
-2 ./workers <# of workers defaulted to 1>
+1. manually start redis-server
+2. ./setup.sh
+2. ./workers <# of workers defaulted to 1>
