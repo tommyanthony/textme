@@ -2,7 +2,9 @@ cd ../
 if [ ! -d logs ]; then
     mkdir logs
 fi
-nohup python3 gmaps_client/gmaps.py > logs/gmaps_out.txt &
+cd gmaps_client/
+nohup python3 gmaps.py > ../logs/gmaps_out.txt &
+cd ../
 cd weather_client/
 nohup python3 forecast.py > ../logs/weather_out.txt &
 cd ../

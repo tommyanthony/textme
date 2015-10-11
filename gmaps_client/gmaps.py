@@ -3,7 +3,7 @@ from flask import Flask
 import googlemaps
 
 app = Flask(__name__)
-with open("gmaps_client/key.txt") as input_key:
+with open("key.txt") as input_key:
     key = next(input_key).strip("\n")
 
 def remove_tags(text):

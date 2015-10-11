@@ -2,6 +2,8 @@
 
 gmaps_client/key.txt
 weather_client/weather.cfg
+logs/
+out.txt
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
